@@ -6,6 +6,16 @@
 <link rel="icon" href="favicon.ico">
 <title>Undangan Pernikahan Rafik & Enci</title>
 
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rafik & Enci - Undangan Pernikahan">
+<meta property="og:description" content="Kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.">
+<meta property="og:image" content="https://eltaxco.github.io/UndanganPernikahan/assets/cover.jpeg">
+<meta property="og:url" content="https://eltaxco.github.io/UndanganPernikahan/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rafik & Enci - Undangan Pernikahan">
+<meta name="twitter:description" content="Kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.">
+<meta name="twitter:image" content="https://eltaxco.github.io/UndanganPernikahan/assets/cover.jpeg">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -272,17 +282,17 @@
 
             <div class="gift-card fade-left">
 
-                <h3>🏦 Bank BCA</h3>
+                <h3>🏦 DANA</h3>
 
                 <div class="rekening">
-                    1234567890
+                    0881011755228
                 </div>
 
                 <p>a.n. Rafik Ibrahim</p>
 
                 <button
                     class="copy-btn"
-                    onclick="copyRekening('1234567890')">
+                    onclick="copyRekening('0881011755228')">
                     Salin Nomor Rekening
                 </button>
 
@@ -290,17 +300,17 @@
 
             <div class="gift-card fade-right">
 
-                <h3>🏦 Bank BRI</h3>
+                <h3>🏦 DANA</h3>
 
                 <div class="rekening">
-                    9876543210
+                    083149357060
                 </div>
 
-                <p>a.n. Pri Siti Lestari</p>
+                <p>a.n. Sri Siti Lestari</p>
 
                 <button
                     class="copy-btn"
-                    onclick="copyRekening('9876543210')">
+                    onclick="copyRekening('083149357060')">
                     Salin Nomor Rekening
                 </button>
 
@@ -339,9 +349,11 @@ rows="4"
 placeholder="Tambahkan Pesan..."
 required></textarea>
 
-            <button type="submit" class="btn">
-                Kirim Ucapan
-            </button>
+<button type="submit" id="btnKirim">
+    Kirim Ucapan
+</button>
+
+<div id="statusKirim"></div>
 
         </form>
 
@@ -397,7 +409,6 @@ required></textarea>
 </section>
 
 <!-- COPYRIGHT -->
-<form id="rsvpForm"></form>
 <footer id="copyright">
 
     <p>© 2026 All Rights Reserved</p>
