@@ -45,7 +45,8 @@ function updateCountdown(){
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    loadUcapan();
 
     const items = document.querySelectorAll(
         '.fade-up,.fade-left,.fade-right,.zoom'
@@ -82,40 +83,59 @@ const form = document.getElementById('rsvpForm');
 const WEB_APP_URL =
 'https://script.google.com/macros/s/AKfycby0kX22Spq0BRxmDIVqkky4tRJll4FIFnelKYAuEg3y1zHUMSE2sN4ypg5KvClRpz4u/exec';
 
+const btnKirim = document.getElementById('btnKirim');
+const statusKirim = document.getElementById('statusKirim');
+
 form.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
+    btnKirim.disabled = true;
+    btnKirim.innerHTML = 'Mengirim...';
+
+    statusKirim.innerHTML = '';
+
     try {
 
-     const data = {
-    nama: document.getElementById('nama').value,
-    hadir: document.getElementById('kehadiran').value,
-    ucapan: document.getElementById('pesan').value
-};
+        const data = {
+            nama: document.getElementById('nama').value,
+            hadir: document.getElementById('kehadiran').value,
+            ucapan: document.getElementById('pesan').value
+        };
 
-        const response = await fetch(WEB_APP_URL,{
-            method:'POST',
-            body:JSON.stringify(data)
-        });
+       await fetch(WEB_APP_URL,{
+    method:'POST',
+    body:JSON.stringify(data)
+});
 
-        console.log(await response.text());
+setTimeout(() => {
+    loadUcapan();
+}, 1500);
 
-        alert('Ucapan berhasil dikirim');
+        statusKirim.innerHTML =
+        '<span style="color:green">✓ Ucapan berhasil dikirim</span>';
 
         form.reset();
 
-        loadUcapan();
+        // muat ulang setelah 1 detik
+        setTimeout(() => {
+            loadUcapan();
+        }, 1000);
 
     } catch(err){
 
         console.error(err);
 
-        alert('Gagal mengirim RSVP');
+        statusKirim.innerHTML =
+        '<span style="color:red">✗ Gagal mengirim ucapan</span>';
 
     }
 
+    btnKirim.disabled = false;
+    btnKirim.innerHTML = 'Kirim Ucapan';
+
 });
+
 async function loadUcapan(){
 
     const response =
@@ -149,7 +169,15 @@ async function loadUcapan(){
 
 }
 
-loadUcapan();
+const list = document.getElementById('listUcapan');
+
+list.insertAdjacentHTML('afterbegin', `
+<div class="ucapan-item">
+    <h4>${data.nama}</h4>
+    <div class="status">${data.hadir}</div>
+    <p>${data.ucapan}</p>
+</div>
+`);
 
 const sections = document.querySelectorAll(
     '#hero, #pengantin, #countdown, #acara, #lokasi, #gift, #rsvp, #ucapan, #terimakasih'
